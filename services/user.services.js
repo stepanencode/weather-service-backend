@@ -1,4 +1,4 @@
-const User = require('../models/user.model')
+const User = require('../models/user.model');
 
 exports.getProfiles = async function (query) {
     try {
@@ -7,7 +7,7 @@ exports.getProfiles = async function (query) {
     } catch (e) {
         throw Error('Error while getProfiles: ' + e.message)
     }
-}
+};
 
 exports.getProfile = async function (query) {
     try {
@@ -16,7 +16,7 @@ exports.getProfile = async function (query) {
     } catch (e) {
         throw Error('Error while getProfile: ' + e.message)
     }
-}
+};
 
 exports.createProfile = async function (query) {
     try {
@@ -26,4 +26,4 @@ exports.createProfile = async function (query) {
     } catch (e) {
         throw Error('Error while createProfile: ' + e.message)
     }
-}
+};

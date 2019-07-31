@@ -20,23 +20,24 @@ app.use(logger);
 
 // Require routes
 app.use(require('./routes/user.routes'));
+app.use(require('./routes/search.routes'));
 
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
-app.post('/login', (req, res) => {
-    console.log(req.body.email, req.body.password);
-    if (req.body.email && req.body.password) {
-        res.send('ok');
-    } else {
-        res.status(400).json({msg: 'Please define email and password'})
-    }
-});
-
-app.post('/register', (req, res) => {
-    res.send('Hello World!');
-});
+//
+// app.post('/login', (req, res) => {
+//     console.log(req.body.email, req.body.password);
+//     if (req.body.email && req.body.password) {
+//         res.send('ok');
+//     } else {
+//         res.status(400).json({msg: 'Please define email and password'})
+//     }
+// });
+//
+// app.post('/register', (req, res) => {
+//     res.send('Hello World!');
+// });
 
 app.listen(constants.PORT, () => console.log(`Server running on port ${constants.PORT}`));
