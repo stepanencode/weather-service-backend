@@ -5,6 +5,7 @@ const UserControllers = require('../controllers/user.controllers');
 const helpers = require('../helpers');
 
 router.get('/profile', helpers.proctectRoute, UserControllers.getProfile);
+router.get('/checkLogin', UserControllers.checkLogin);
 router.post('/register', UserControllers.register);
 router.post('/login', UserControllers.login);
 router.put('/profile', helpers.proctectRoute, UserControllers.updateProfile);

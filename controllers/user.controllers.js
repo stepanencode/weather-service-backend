@@ -14,6 +14,7 @@ exports.getProfile = async function (req, res, next) {
 };
 
 exports.register = async function (req, res, next) {
+
     try {
         const data = await UserServices.createProfile(req.body);
         return res.status(200).json({ status: 200, data: {email: data.email, username: data.username}, message: "Success" });
@@ -32,9 +33,10 @@ exports.updateProfile = async function (req, res, next) {
 };
 
 exports.login = async function (req, res, next) {
+    console.log('1', req.body)
     try {
         const data = await UserServices.searchProfile({email: req.body.email});
-        console.log(data);
+        console.log(data, 'data');
         bcrypt.compare(req.body.password, data.password).then(function(result) {
           if (result) {
             let token = jwt.sign({userId: data.id}, constants.TOKEN_KEY);
@@ -47,3 +49,25 @@ exports.login = async function (req, res, next) {
         return res.status(400).json({ status: 400, message: e.message });
     }
 };
+
+exports.checkLogin = async function (req, res) {
+    console.log('req.headers', req.headers.token);
+    // jwt.verify
+
+    try {
+
+
+        const verify = jwt.verify(req.headers.token, constants.TOKEN_KEY, (err, decoded) => {
+            console.log('decoded', decoded);
+            if(!decoded || err) return res.status(401).json({message: 'Unauthorized'});
+            return res.status(200).json({ status: 200, message: "Success" });
+
+        });
+
+        // res.status(400).json({message: 'Invalid password or username'});
+
+    } catch (e) {
+        return res.status(400).json({ status: 400, message: e.message });
+    }
+
+}

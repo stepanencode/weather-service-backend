@@ -12,6 +12,7 @@ exports.getProfile = async function (query) {
 exports.searchProfile = async function (query) {
     try {
         let user = await User.findOne(query).exec();
+        if(!user) throw new Error('Login or password not found');
         return user;
     } catch (e) {
         throw Error('Error while getProfile: ' + e.message)
