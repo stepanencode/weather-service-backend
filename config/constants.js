@@ -1,7 +1,9 @@
 const PORT = process.env.PORT || 5000;
 const MONGODB_CONNECTION =  process.env.MONGODB_CONNECTION || 'mongodb://127.0.0.1/database';
 
-ICONS = [
+const TOKEN_KEY = process.env.TOKEN_KEY || 'djghhhhuuwiwuewieuwieuriwu';
+
+const ICONS = [
   '01d.png',
   '02d.png',
   '03d.png',
@@ -22,7 +24,7 @@ ICONS = [
   '50n.png',
 ];
 
-CONDITIONS = [
+ const CONDITIONS = [
   'Thunderstorm',
   'Drizzle',
   'Rain',
@@ -40,4 +42,4 @@ CONDITIONS = [
   'Clouds'
 ];
 
-module.exports = { PORT, MONGODB_CONNECTION, ICONS, CONDITIONS };
+module.exports = { PORT, MONGODB_CONNECTION, TOKEN_KEY, ICONS, CONDITIONS };

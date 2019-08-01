@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const UserControllers = require('../controllers/user.controllers');
+const auth = require('../helpers');
 
-router.get('/profiles', UserControllers.getProfiles);
-router.get('/profile/:id', UserControllers.getProfile);
-router.post('/profile', UserControllers.createProfile);
-router.put('/profile/:id', UserControllers.updateProfile);
+router.get('/profile/:id', auth.proctectRoute, UserControllers.getProfile);
+router.post('/register', UserControllers.register);
+router.post('/login', UserControllers.login);
+router.put('/profile/:id', auth.proctectRoute, UserControllers.updateProfile);
 
 module.exports = router;
