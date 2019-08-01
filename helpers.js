@@ -2,7 +2,6 @@ const moment = require('moment');
 const jwt = require('jsonwebtoken');
 const constants = require('./config/constants');
 const User = require('./models/user.model');
-
 exports.proctectRoute = function (req,res,next){
   if(req.user){
      next();
@@ -19,9 +18,9 @@ exports.logger = (req, res, next) => {
 
 exports.getUser = (req, res, next) => {
     try {
-      const token = req.headers.authorization.split(" ")[1];
+      const token = req.headers.authorization.split(" ")[1]
       jwt.verify(token, constants.TOKEN_KEY, function (err, payload) {
-      console.log(payload);
+      console.log(payload)
         if (payload) {
           User.findById(payload.userId).then(
             (doc) => {
@@ -34,7 +33,6 @@ exports.getUser = (req, res, next) => {
         }
     })
   } catch(e){
-    console.log(e.message);
     next()
   }
 };

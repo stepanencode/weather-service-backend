@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+var cors = require('cors');
 const constants = require('./config/constants');
 const helpers = require('./helpers');
 
@@ -11,9 +12,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helpers.logger);
 app.use(helpers.getUser);
 
+app.use(cors());
+
 app.use(require('./routes/user.routes'));
 app.use(require('./routes/search.routes'));
 app.use(require('./routes/result.routes'));
+
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

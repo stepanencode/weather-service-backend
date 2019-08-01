@@ -2,15 +2,6 @@ const Search = require('../models/search.model');
 
 exports.getSearches = async function (query) {
     try {
-        let result = await Search.find().exec();
-        return result;
-    } catch (e) {
-        throw Error('Error while getSearches: ' + e.message)
-    }
-};
-
-exports.getSearches = async function (query) {
-    try {
         console.log(query);
         let search = await Search.find(query).exec();
         return search;
