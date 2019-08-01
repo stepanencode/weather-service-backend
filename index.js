@@ -15,16 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(logger);
 
-
 app.use(require('./routes/user.routes'));
 app.use(require('./routes/search.routes'));
 app.use(require('./routes/result.routes'));
 
-
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
-
 
 app.listen(constants.PORT, () => console.log(`Server running on port ${constants.PORT}`));
