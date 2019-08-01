@@ -27,3 +27,14 @@ exports.createProfile = async function (query) {
         throw Error('Error while createProfile: ' + e.message)
     }
 };
+
+exports.updateProfile = async function (query) {
+    try {
+        let user = await User.findById(query.id).exec();
+        user.set(query);
+        let result = await user.save();
+        return result;
+    } catch (e) {
+        throw Error('Error while updateProfile: ' + e.message)
+    }
+};

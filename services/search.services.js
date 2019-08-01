@@ -9,7 +9,7 @@ exports.getSearches = async function (query) {
     }
 };
 
-exports.getSearch = async function (query) {
+exports.getSearches = async function (query) {
     try {
         console.log(query);
         let search = await Search.find(query).exec();
