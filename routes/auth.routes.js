@@ -3,11 +3,9 @@ const router = express.Router();
 
 const UserControllers = require('../controllers/user.controllers');
 const helpers = require('../helpers');
+const authMiddleware = require('../middlewares/auth.middleware')
 
-router.get('/profile', helpers.proctectRoute, UserControllers.getProfile);
-router.get('/checkLogin', UserControllers.checkLogin);
 router.post('/register', UserControllers.register);
 router.post('/login', UserControllers.login);
-router.put('/profile', helpers.proctectRoute, UserControllers.updateProfile);
 
 module.exports = router;
