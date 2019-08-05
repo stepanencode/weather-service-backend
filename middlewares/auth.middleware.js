@@ -4,10 +4,8 @@ const UserService = require('../services/user.services');
 
 exports.checkAuth = function (req, res, next) {
 
-    console.log('checkAuth middleware')
-
+    console.log('checkAuth middleware');
     console.log('req.headers', req.headers.token);
-    // jwt.verify
 
     try {
         const verify = jwt.verify(req.headers.token, constants.TOKEN_KEY, async (err, decoded) => {
@@ -21,4 +19,4 @@ exports.checkAuth = function (req, res, next) {
     } catch (e) {
         return res.status(400).json({ status: 403, message: 'Forbidden' });
     }
-}
+};

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const UserServices = require('../services/user.services');
 const constants = require('../config/constants');
 
-exports.getProfile = async function (req, res, next) {
+exports.getProfile = async function (req, res) {
     try {
         const data = await UserServices.getProfile({id: req.user.id});
         return res.status(200).json({ status: 200, data: {email: data.email, username: data.username}, message: "Success" });
@@ -13,17 +13,30 @@ exports.getProfile = async function (req, res, next) {
     }
 };
 
-exports.register = async function (req, res, next) {
+exports.register = async function (req, res) {
 
-    try {
-        const data = await UserServices.createProfile(req.body);
-        return res.status(200).json({ status: 200, data: {email: data.email, username: data.username}, message: "Success" });
-    } catch (e) {
-        return res.status(400).json({ status: 400, message: e.message });
+    if(req.body.confirm_password === undefined ) {
+        return res.status(400).json({status: 400, message: "Enter confirm password"});
     }
+
+    if( req.body.confirm_password !== req.body.password ) {
+        return res.status(400).json({status: 400, message: "Confirm password not equal password"});
+    }
+
+        try {
+            const data = await UserServices.createProfile(req.body);
+            return res.status(200).json({
+                status: 200,
+                data: {email: data.email, username: data.username},
+                message: "Success"
+            });
+        } catch (e) {
+            return res.status(400).json({status: 400, message: e.message});
+        }
+
 };
 
-exports.updateProfile = async function (req, res, next) {
+exports.updateProfile = async function (req, res) {
     try {
         console.log(123123, req.body);
         const data = await UserServices.updateProfile({...req.body, id: req.user.id});
@@ -33,7 +46,7 @@ exports.updateProfile = async function (req, res, next) {
     }
 };
 
-exports.login = async function (req, res, next) {
+exports.login = async function (req, res) {
     try {
         const data = await UserServices.searchProfile({email: req.body.email});
         console.log(data, 'data');
@@ -52,4 +65,4 @@ exports.login = async function (req, res, next) {
 
 exports.checkLogin = async function (req, res) {
    return res.status(200).json({ status: 200, message: "Success" });
-}
+};

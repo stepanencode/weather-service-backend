@@ -1,6 +1,6 @@
 const SearchServices = require('../services/search.services');
 
-exports.getSearch = async function (req, res, next) {
+exports.getSearch = async function (req, res) {
     try {
         const data = await SearchServices.getSearch({_id: req.params.id}, {items: true});
         return res.status(200).json({ status: 200, data: data, message: "Success" });
@@ -9,7 +9,7 @@ exports.getSearch = async function (req, res, next) {
     }
 };
 
-exports.getSearches = async function (req, res, next) {
+exports.getSearches = async function (req, res) {
     try {
         const data = await SearchServices.getSearches({user: req.user.id}, {items: false});
         return res.status(200).json({ status: 200, data: data, message: "Success" });
@@ -18,7 +18,7 @@ exports.getSearches = async function (req, res, next) {
     }
 };
 
-exports.createSearch = async function (req, res, next) {
+exports.createSearch = async function (req, res) {
     try {
         const data = await SearchServices.createSearch({...req.body, user: req.user.id});
         return res.status(200).json({ status: 200, data: data, message: "Success" });
