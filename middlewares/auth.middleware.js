@@ -12,7 +12,7 @@ exports.checkAuth = function (req, res, next) {
             console.log('decoded', decoded);
             if(!decoded || err) return res.status(401).json({message: 'Unauthorized'});
 
-            const findUser = await UserService.getProfile({id: decoded.userId});
+            const findUser = await UserService.getProfile({_id: decoded.userId});
             req.user = findUser;
             next();
         });

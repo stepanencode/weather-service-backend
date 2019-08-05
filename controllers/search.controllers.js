@@ -2,7 +2,7 @@ const SearchServices = require('../services/search.services');
 
 exports.getSearch = async function (req, res) {
     try {
-        const data = await SearchServices.getSearch({_id: req.params.id}, {items: true});
+        const data = await SearchServices.getSearch({_id: req.params.id}, {items: true, city: true, createdAt: true});
         return res.status(200).json({ status: 200, data: data, message: "Success" });
     } catch (e) {
         return res.status(400).json({ status: 400, message: e.message });

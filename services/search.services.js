@@ -2,7 +2,6 @@ const Search = require('../models/search.model');
 
 exports.getSearch = async function (query, fields) {
     try {
-        console.log(111, query);
         let search = await Search.findOne(query, fields).exec();
         return search;
     } catch (e) {

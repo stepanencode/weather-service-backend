@@ -6,7 +6,7 @@ const constants = require('../config/constants');
 
 exports.getProfile = async function (req, res) {
     try {
-        const data = await UserServices.getProfile({id: req.user.id});
+        const data = await UserServices.getProfile({_id: req.user.id});
         return res.status(200).json({ status: 200, data: {email: data.email, username: data.username}, message: "Success" });
     } catch (e) {
         return res.status(400).json({ status: 400, message: e.message });
@@ -48,7 +48,7 @@ exports.updateProfile = async function (req, res) {
 
 exports.login = async function (req, res) {
     try {
-        const data = await UserServices.searchProfile({email: req.body.email});
+        const data = await UserServices.getProfile({email: req.body.email});
         console.log(data, 'data');
         bcrypt.compare(req.body.password, data.password).then(function(result) {
           if (result) {
